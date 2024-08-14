@@ -1,0 +1,456 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="page-container">
+<div class="container" id="main-container">
+    <div class="header">
+        <div class="header-text">
+        <h1>Employees</h1>
+        <p>List of all active employees</p>
+        </div>
+        <div class="new-member-btn-div">
+        <a (click)="onOpenModal(null,'add')" class="new-member-link"><button class="new-member-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-add" viewBox="0 0 20 20">
+                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
+          </svg></button></a>
+        </div>
+    </div>
+    <table class="user-list">
+        <thead>
+            <tr>
+
+                                <th><span>S. No.</span></th>
+                                <th><span>Employee</span></th>
+                                <th><span>Phone No.</span></th>
+                                <th><span>Email</span></th>
+                                <th><span>Department</span></th>
+                                <th><span>Job-Type</span></th>
+                                <th><span>Work-shift</span></th>
+                                <th><span>Salary</span></th>
+                                <th><span>Due Date</span></th>
+                                <th class="text-center"><span><a (click)="checkStatus()" class="status-link">Status</a></span></th>
+                                <th><span>Action</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employees">
+                <td></td>
+                <td style="width: auto;">
+                    <div class="author-info">
+                        <div class="avatar" id="avatar1"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                          </svg></div>
+                        <div class="author-details">
+                            <div class="name">
+                                    <!-- <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""> -->
+                                    
+                                    <a (click)="onOpenModal(employee,'show')" class="user-link">  {{employee.name}}</a>
+                            </div>
+                            <div class="user-subhead">{{employee.jobtitle}} | {{dateFormat(employee.dateofhireDate)}} </div>
+                        </div>
+                    </div>
+                </td>
+                <td>{{employee.phone}}</td>
+                <td>{{employee.email}}</td>
+                <td>{{employee.department}}</td>
+                <td>{{employee.jobtype}}</td>
+                <td>{{employee.workshift}}</td>
+                <td>Rs.{{employee.salary}}/-</td>
+                <td>{{dateFormat(employee.salaryduedate)}}</td>
+                <td>
+                        <div *ngIf="employee.salaryStatus =='Due'" class="btn-danger" style="height: auto; width: auto; background-color:rgba(255, 0, 0, 0.772);">
+                            <p>{{employee.salaryStatus}}</p>
+                        </div>
+                        <div *ngIf="employee.salaryStatus == 'Paid'" class="btn-danger" style="height: auto; width: auto; background-color:rgba(0, 255, 64, 0.634);">
+                            <p>{{employee.salaryStatus}}</p>
+                        </div>                    
+                </td>
+                <td>
+                        <div class="action-buttons">
+                            <div class="edit-btn-div">
+                                <a (click)="onOpenModal(employee,'edit')" class="table-link">
+                                    <span class="fa-stack">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                          </svg>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="delete-btn-div">
+                                <a (click)="onOpenModal(employee,'delete')" class="table-link danger">
+                                    <span class="fa-stack">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                          </svg>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="message-btn-div">
+                                <a (click)="onOpenModal(employee,'message')"  class="table-link">
+                                    <span class="fa-stack">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-arrow-up" viewBox="0 0 16 16">
+                                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4.5a.5.5 0 0 1-1 0V5.383l-7 4.2-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h5.5a.5.5 0 0 1 0 1H2a2 2 0 0 1-2-1.99zm1 7.105 4.708-2.897L1 5.383zM1 4v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1"/>
+                                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.354-5.354 1.25 1.25a.5.5 0 0 1-.708.708L13 12.207V14a.5.5 0 0 1-1 0v-1.717l-.28.305a.5.5 0 0 1-.737-.676l1.149-1.25a.5.5 0 0 1 .722-.016"/>
+                                          </svg>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>                        
+</div>
+</div>
+
+
+
+
+    <!-- Show Employee card -->
+<div class="modal fade" id="showEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="showModelLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title" id="showModelLabel">Employee</h5>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                 </button>
+                              </div>
+                              <div class="modal-body">
+                                
+                                <div class="card-container">
+                                    <div class="card-container-row">
+                                        <div class="col-md-4">
+                                            <div class="card user-card">
+                                                <div class="card-header">
+                                                    <h5>Profile</h5>
+                                                </div>
+                                                <div class="card-block">
+                                                    <div class="user-image">
+                                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-radius" alt="User-Profile-Image">
+                                                    </div>
+                                                    <h6 class="f-w-600 m-t-25 m-b-10"> {{showEmployee?.name}}</h6>
+                                                    <p class="text-muted">{{showEmployee?.jobtitle}} | {{showEmployee?.workshift}} | {{dateFormat(showEmployee?.dateofhireDate)}}</p>
+                                                    <hr>
+                                                    
+                                                    <p class="text-muted m-t-15">Email-{{showEmployee?.email}}</p>
+                                                    <p class="text-muted m-t-15">Gender-{{showEmployee?.gender}}</p>
+                                                    <p class="text-muted m-t-15">Phone no.-{{showEmployee?.phone}}</p>
+                                                    <p class="text-muted m-t-15">Department-{{showEmployee?.department}}</p>
+                                                    <p class="text-muted m-t-15">Salary:-RS.{{showEmployee?.salary}}</p>
+                                                    <p class="text-muted m-t-15">Remarks-{{showEmployee?.performanceReview}}</p>
+                                                    <p class="text-muted m-t-15">Address-{{showEmployee?.address}}</p>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                              </div>
+                           </div>
+                        </div>
+</div>
+
+<!-- Add Employee -->
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="AddEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+             </button>
+          </div>
+          <div class="modal-body">
+             <form #addForm="ngForm" (ngSubmit)="onAddEmployee(addForm)">
+                <!-- personal -->
+            <div class="form-group">
+                    <label for="name">Name</label>
+             <input type="text" #name="ngModel" ngModel name="name" class="form-control" id="name" placeholder="Name" required>
+             <div *ngIf="name.invalid && name.touched" class="text-danger">
+              Name is required!
+             </div>
+            </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                 <input type="text" #phone="ngModel" ngModel name="phone" class="form-control" id="phone" placeholder="Phone"
+                     [ngClass]="{'is-invalid': phone.invalid && phone.touched || isPhoneDuplicate}"
+                    (ngModelChange)="phoneValidator($event)" required>
+                <div *ngIf="phone.errors?.['required'] && email.touched"   class="text-danger" >
+                  Phone No. is required!
+                </div>
+                <div *ngIf="phone.errors?.['phone'] && email.touched" class="text-danger">
+                  Invalid Number!
+                </div>
+                <div *ngIf="isPhoneDuplicate && email.touched" class="text-danger">
+                  Duplicate Number detected!
+                </div>
+                 </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" #email="ngModel" ngModel name="email" class="form-control" id="email" placeholder="Email"
+                    [ngClass]="{'is-invalid': email.invalid && email.touched || isEmailDuplicate}" 
+                    (ngModelChange)="emailValidator($event)"  required>
+                   <div *ngIf="email.errors?.['required'] && email.touched"   class="text-danger" >
+                     Email is required!
+                   </div>
+                   <div *ngIf="email.errors?.['email'] && email.touched" class="text-danger">
+                     Invalid Email format!
+                   </div>
+                   <div *ngIf="isEmailDuplicate && email.touched" class="text-danger">
+                     Duplicate Email detected!
+                   </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Gender</label>
+                    <div>
+                        <input type="radio" #gender="ngModel" ngModel name="gender" id="Gender" value="Male" ngModel>
+                        <label for="male">Male</label>
+                      </div>
+                      <div>
+                        <input type="radio" #gender="ngModel" ngModel name="gender" id="gender" value="Female" ngModel>
+                        <label for="male">Female</label>
+                      </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Address</label>
+                     <input type="text" #address="ngModel" ngModel name="address" class="form-control" id="address" placeholder="Address" required>
+                    <div *ngIf="address.invalid && address.touched" class="text-danger">
+                       Address is required!
+                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Date of Birth</label>
+                    <input type="date" #dobDate="ngModel" ngModel name="dobDate" class="form-control" id="dobDate" placeholder="dd/mm/yyyy" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Hiring-Date</label>
+                    <input type="date" #dateofhireDate="ngModel" ngModel name="dateofhireDate" class="form-control" id="dateofhireDate" placeholder="dd/mm/yyyy" required>
+                </div>
+                <!-- Professional -->
+                 <div class="form-group">
+                    <label for="name">Job-Title</label>
+                    <input type="text" #vehicle="ngModel" ngModel name="jobtitle" class="form-control" id="jobtitle" placeholder="jobtitle">
+                    
+                </div>
+                <div class="form-group">
+                    <label for="name">Department</label>
+                    <input type="text" #profession="ngModel" ngModel name="department" class="form-control" id="department" placeholder="Department">
+                </div>
+                <div class="form-group">
+                    <label for="name">Job-Type</label>
+                    <input type="text" #officename="ngModel" ngModel name="jobtype" class="form-control" id="jobtype" placeholder="jobtype">
+                </div>
+                 <div class="form-group">
+                    <label for="name">Work-shift</label>
+                    <input type="text" #workshift="ngModel" ngModel name="workshift" class="form-control" id="workshift" placeholder="Day/Night">
+                </div>
+                 <!-- Finance -->
+                 <div class="form-group">
+                    <label for="name">Salary: Rs.</label>
+                    <input type="text" #salary="ngModel" ngModel name="salary" class="form-control" id="salary" placeholder="Rs.0000" required>
+                </div>
+                 
+                <div class="modal-footer">
+                   <button type="button" id="add-employee-form" data-bs-dismiss="modal" class="btn btn-secondary">Close</button>
+                   <button [disabled]="addForm.invalid || isEmailDuplicate || isPhoneDuplicate" type="submit" class="btn btn-primary" >Submit</button>
+                </div>
+             </form>
+          </div>
+       </div>
+    </div>
+  </div>
+
+
+                    <!-- edit Employee -->
+                    <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title" id="updateEmployeeModalLabel">Edit Employee {{editEmployee?.name}}</h5>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                 </button>
+                              </div>
+                              <div class="modal-body">
+                                 <form #editForm="ngForm">
+                                    <!-- personal -->
+                                    <div class="form-group">
+                                       <label for="name">Name</label>
+                                       <input type="text" ngModel="{{editEmployee?.name}}" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name" required>
+                                    </div>
+                                    <input type="hidden" ngModel="{{editEmployee?.id}}" name="id" class="form-control" id="id" placeholder="">
+                                    <input type="hidden" ngModel="{{editEmployee?.employeeid}}" name="userCode" class="form-control" id="userCode" placeholder="">
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" #phone="ngModel" ngModel="{{editEmployee?.phone}}" name="phone" class="form-control" id="phone" name="phone" placeholder="Phone" 
+                                        [ngClass]="{'is-invalid': phone.invalid && phone.touched || isPhoneDuplicate}"
+                                        (ngModelChange)="phoneValidator($event)"  required>
+                                        <div *ngIf="phone.errors?.['required'] && email.touched"   class="text-danger" >
+                                            Phone No. is required!
+                                          </div>
+                                          <div *ngIf="phone.errors?.['phone'] && email.touched" class="text-danger">
+                                            Invalid Number!
+                                          </div>
+                                          <div *ngIf="isPhoneDuplicate && email.touched" class="text-danger">
+                                            Duplicate Number detected!
+                                          </div>
+                                     </div>
+                                    <div class="form-group">
+                                       <label for="email">Email Address</label>
+                                       <input type="email" #email="ngModel" ngModel="{{editEmployee?.email}}" name="email" class="form-control" id="email" placeholder="Email" 
+                                       [ngClass]="{'is-invalid': email.invalid && email.touched || isEmailDuplicate}" 
+                                       (ngModelChange)="emailValidator($event)" required>
+                                       <div *ngIf="email.errors?.['required'] && email.touched"   class="text-danger" >
+                                        Email is required!
+                                      </div>
+                                      <div *ngIf="email.errors?.['email'] && email.touched" class="text-danger">
+                                        Invalid Email format!
+                                      </div>
+                                      <div *ngIf="isEmailDuplicate && email.touched" class="text-danger">
+                                        Duplicate Email detected!
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Address</label>
+                                        <input type="text" ngModel="{{editEmployee?.address}}" name="address" class="form-control" id="address" placeholder="Address" required>
+                                        <div *ngIf="address.invalid && address.touched" class="text-danger">
+                                            Address is required!
+                                          </div>
+                                     </div>
+                                     <div class="form-group">
+                                        <label for="name">Gender</label>
+                                        <div>
+                                            <input type="radio" ngModel="{{editEmployee?.gender}}" name="gender" id="gender" value="Male"  [checked]="editEmployee?.gender === 'Male'" ngModel>
+                                            <label for="male">Male</label>
+                                          </div>
+                                          <div>
+                                            <input type="radio" ngModel="{{editEmployee?.gender}}" name="gender" id="gender" value="Female" [checked]="editEmployee?.gender === 'Female'" ngModel>
+                                            <label for="male">Female</label>
+                                          </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Date of Birth</label>
+                                        <input type="date" ngModel="{{editEmployee?.dobDate}}" name="dobDate" class="form-control" id="dobDate" placeholder="dd/mm/yyyy" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="name">Hiring-Date</label>
+                                        <input type="date" ngModel="{{editEmployee?.dateofhireDate}}" name="dateofhireDate" class="form-control" id="dateofhireDate" placeholder="dd/mm/yyyy" required>
+                                    </div>
+                                     <!-- professional -->
+                                     <div class="form-group">
+                                        <label for="name">Job-Title</label>
+                                        <input type="text" ngModel="{{editEmployee?.jobtitle}}" name="jobtitle" class="form-control" id="jobtitle" placeholder="jobtitle">
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Department</label>
+                                        <input type="text" ngModel="{{editEmployee?.department}}" name="department" class="form-control" id="department" placeholder="Department">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Job-Type</label>
+                                        <input type="text" ngModel="{{editEmployee?.jobtype}}" name="jobtype" class="form-control" id="jobtype" placeholder="jobtype">
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="name">Work-shift</label>
+                                        <input type="text" ngModel="{{editEmployee?.workshift}}" name="workshift" class="form-control" id="workshift" placeholder="Day/Night">
+                                    </div>
+                                     <!-- Finance -->
+                                     <div class="form-group">
+                                        <label for="name">Salary: Rs.</label>
+                                        <input type="text" ngModel="{{editEmployee?.salary}}" name="salary" class="form-control" id="salary" placeholder="Rs.0000" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="name">Due Date: </label>
+                                        <input type="date" ngModel="{{editEmployee?.salaryduedate}}" name="salaryduedate" class="form-control" id="salaryduedate" placeholder="dd/mm/yyyy">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Remark: </label>
+                                        <input type="text" ngModel="{{editEmployee?.performanceReview}}" name="performanceReview" class="form-control" id="performanceReview" placeholder="Write here">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Status:</label>
+                                        <div>
+                                            <input type="radio" ngModel="{{editEmployee?.salaryStatus}}" name="salaryStatus" id="salaryStatus" value="Due"  [checked]="editEmployee?.salaryStatus === 'Due'" ngModel>
+                                            <label for="Due">Due</label>
+                                          </div>
+                                          <div>
+                                            <input type="radio" ngModel="{{editEmployee?.salaryStatus}}" name="salaryStatus" id="salaryStatus" value="Paid" [checked]="editEmployee?.salaryStatus === 'Paid'" ngModel>
+                                            <label for="Paid">Paid</label>
+                                          </div>
+                                    </div>
+                                    <!-- footer -->
+                                    <div class="modal-footer">
+                                       <button type="button" id="edit-tenant-form" data-bs-dismiss="modal" class="btn btn-secondary">Close</button>
+                                       <button [disabled]="editForm.invalid || isEmailDuplicate || isPhoneDuplicate" (click)="onUpdateEmployee(editForm)"  data-bs-dismiss="modal" class="btn btn-primary" >Save changes</button>
+                                    </div>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                      </div>
+
+
+                      <!-- Delete Employee -->
+                      <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" aria-labelledby="deleteModelLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title" id="deleteModelLabel">Delete Employee</h5>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                 </button>
+                              </div>
+                              <div class="modal-body">
+                                 <p style="font-size: large; font-weight: bold;">Are you sure you want to delete Employee "{{deleteEmployee?.name}}" ?</p>
+                                 <div class="modal-footer">
+                                 <div class="modal-footer-yesbtn">
+                                    <button (click)="onDeleteEmployee(deleteEmployee!.id)" class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
+                                 </div>
+                                 <div class="modal-footer-nobtn">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                      </div>
+
+
+
+                      <!-- SEND MESSAGE -->
+                      <div class="modal fade" id="messageEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="messageModelLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title" id="messageModelLabel">Messaging Employee</h5>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                 </button>
+                              </div>
+                              <div class="modal-body">
+                                 <p style="font-size: large; font-weight: bold;">Are you sure you want to send message to Employee "{{messageEmployee?.name}}" ?</p>
+                                 <div class="modal-footer">
+                                 <div class="modal-footer-yesbtn">
+                                    <button (click)="onMessageEmployee(messageEmployee!.id)" class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
+                                 </div>
+                                 <div class="modal-footer-nobtn">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                      </div>
+
+
+        
+
+                    
+                    
+        
+   
