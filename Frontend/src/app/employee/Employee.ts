@@ -1,0 +1,20 @@
+export interface Employee{
+    id: number,
+    name: string,
+    address: string,
+    gender: string,
+    email: string,
+    phone: string,
+    dobDate: Date,
+    dateofhireDate: Date,
+    jobtype: string,
+    workshift: string,
+    leavebalance: string,
+    jobtitle: string,
+    department: string,
+    salary: string,
+    salaryduedate: Date,
+    salaryStatus: string,
+    performanceReview: string,
+    employeeid: string
+}
