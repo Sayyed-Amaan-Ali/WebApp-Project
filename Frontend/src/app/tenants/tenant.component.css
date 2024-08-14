@@ -1,0 +1,393 @@
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css';
+
+.page-header{
+    font-weight: bold;
+    color: #1f1f1f;
+    background-color: #1f1f1f;
+    padding: 10px;
+}
+
+.page-container {
+    background-color: white;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    height: 80rem;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.new-member-btn-div {
+    display: flex;
+    flex-direction: column-reverse;
+}
+.search-div {
+    display: flex;
+    flex-direction: column-reverse;   
+}
+
+.header h1 {
+    color: black;
+    margin: 0;
+}
+
+.header p {
+    margin: 0;
+    color: black;
+}
+
+.new-member-btn {
+    background-color: #18336F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.status-link {
+    cursor: pointer;
+}
+
+table {
+    overflow-y: auto;
+    overflow-x: auto;
+    border-collapse: collapse;
+}
+
+.user-list{
+    counter-reset: rowNumber;
+}
+
+thead {
+    background-color: #5e5c5c35;
+}
+thead tr th {
+    white-space: nowrap;
+    color: black;
+    padding: 15px;
+    text-align: left;
+}
+
+td {
+    color: black;
+    padding: 15px;
+    text-align: left;
+}
+
+.user-list tbody tr{
+    counter-increment: rowNumber;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddada13;
+}
+
+.user-list tbody tr td:first-child:before {
+    content: counter(rowNumber);
+}
+
+.author-info {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.name {
+    vertical-align: bottom;
+    font-weight: bold;
+}
+.user-subhead{
+    font-size: small;
+}
+
+.btn-danger {
+    width:auto;
+    height:auto;
+    margin: center;
+    
+    margin-top: 10%;
+    border-radius: 15%;
+    justify-content: space-between;
+    font-size:small;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+}
+
+.progress-bar {
+    height: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.action-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 20px;
+    margin-bottom: 20px; 
+}
+
+.edit-btn-div, .delete-btn-div, .message-btn-div {
+    color: black;
+    display: flex;
+    flex-direction: column-reverse;
+    background-size: cover;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.action-buttons a:hover{
+    /* height: 30px;
+    width: 30px; */
+
+    color: #00c3f3;
+}
+
+a {
+    color: black;
+}
+
+.table-link.disabled {
+    pointer-events: none;
+    opacity: 0.2; /* Make it look disabled */
+  }
+
+
+
+
+
+
+
+.modal-footer {
+    display: flex;
+    align-items: flex-end;
+}
+.modal-footer-yesbtn {
+    display: flex;
+    flex-direction: column;
+}
+.modal-footer-nobtn {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+
+
+
+
+
+
+
+
+/* card */
+
+.card-container {
+    width: 1400px;
+}
+
+.card.user-card {
+    border-top: none;
+    -webkit-box-shadow: 0 0 1px 2px rgba(0,0,0,0.05), 0 -2px 1px -2px rgba(0,0,0,0.04), 0 0 0 -1px rgba(0,0,0,0.05);
+    box-shadow: 0 0 1px 2px rgba(0,0,0,0.05), 0 -2px 1px -2px rgba(0,0,0,0.04), 0 0 0 -1px rgba(0,0,0,0.05);
+    -webkit-transition: all 150ms linear;
+    transition: all 150ms linear;
+}
+
+.card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.card .card-header {
+    background-color: transparent;
+    border-bottom: none;
+    padding: 25px;
+}
+
+.card .card-header h5 {
+    margin-bottom: 0;
+    color: #222;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 10px;
+    line-height: 1.4;
+}
+
+.card .card-header+.card-block, .card .card-header+.card-block-big {
+    padding-top: 0;
+}
+
+.user-card .card-block {
+    text-align: center;
+}
+
+.card .card-block {
+    padding: 25px;
+}
+
+.user-card .card-block .user-image {
+    position: relative;
+    margin: 0 auto;
+    display: inline-block;
+    padding: 5px;
+    width: 110px;
+    height: 110px;
+}
+
+.user-card .card-block .user-image img {
+    z-index: 20;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+        width: 100px;
+    height: 100px;
+}
+
+.img-radius {
+    border-radius: 50%;
+}
+
+.f-w-600 {
+    font-weight: 600;
+}
+
+.m-b-10 {
+    margin-bottom: 10px;
+}
+
+.m-t-25 {
+    margin-top: 25px;
+}
+
+.m-t-15 {
+    margin-top: 15px;
+}
+
+.card .card-block p {
+    line-height: 1.4;
+}
+
+.text-muted {
+    color: #919aa3!important;
+}
+
+.user-card .card-block .activity-leval li.active {
+    background-color: #2ed8b6;
+}
+
+.user-card .card-block .activity-leval li {
+    display: inline-block;
+    width: 15%;
+    height: 4px;
+    margin: 0 3px;
+    background-color: #ccc;
+}
+
+.user-card .card-block .counter-block {
+    color: #fff;
+}
+
+.bg-c-blue {
+    background: linear-gradient(45deg,#4099ff,#73b4ff);
+}
+
+.bg-c-green {
+    background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+}
+
+.bg-c-yellow {
+    background: linear-gradient(45deg,#FFB64D,#ffcb80);
+}
+
+.bg-c-pink {
+    background: linear-gradient(45deg,#FF5370,#ff869a);
+}
+
+.m-t-10 {
+    margin-top: 10px;
+}
+
+.p-20 {
+    padding: 20px;
+}
+
+.user-card .card-block .user-social-link i {
+    font-size: 30px;
+}
+
+.text-facebook {
+    color: #3B5997;
+}
+
+.text-twitter {
+    color: #42C0FB;
+}
+
+.text-dribbble {
+    color: #EC4A89;
+}
+
+.user-card .card-block .user-image:before {
+    bottom: 0;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.user-card .card-block .user-image:after, .user-card .card-block .user-image:before {
+    content: "";
+    width: 100%;
+    height: 48%;
+    border: 2px solid #4099ff;
+    position: absolute;
+    left: 0;
+    z-index: 10;
+}
+
+.user-card .card-block .user-image:after {
+    top: 0;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+.user-card .card-block .user-image:after, .user-card .card-block .user-image:before {
+    content: "";
+    width: 100%;
+    height: 48%;
+    border: 2px solid #4099ff;
+    position: absolute;
+    left: 0;
+    z-index: 10;
+}
